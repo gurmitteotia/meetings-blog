@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MeetingBlog.OOP;
+using MeetingBlog.POOP;
 using Moq;
 using NUnit.Framework;
 
@@ -25,51 +25,41 @@ namespace MeetingBlog.Tests.POOP
         public void Can_parse_multiple_meetings_from_file()
         {
             _fileReader.Setup(f => f.ReadData(_fileName))
-                .Returns(new[] {"OOP Intro,SpiderMan, 24-11-2016, 10:00:00, 11:00:00"});
+                .Returns(new[] { "Name, Organiser, Date, Start Time, End time",
+                                 "OOP Intro,SpiderMan, 24-11-2016, 10:00:00, 11:00:00",
+                                "Function Programming Intro,SuperMan, 25-11-2016, 09:00:00, 10:00:00" });
 
             var meetings = _csvMeetingFileParser.ParseMeetings(_fileName);
-        }
-    }
 
-    internal interface IFileReader
-    {
-        IEnumerable<string> ReadData(string filePath);
-    }
-
-    internal class CsvMeetingFileParser
-    {
-        private readonly IFileReader _fileReader;
-
-        public CsvMeetingFileParser(IFileReader fileReader)
-        {
-            _fileReader = fileReader;
-        }
-        public IEnumerable<Meeting> ParseMeetings(string meetingfileCsv)
-        {
-            var meetingLines = _fileReader.ReadData(meetingfileCsv);
-
-            return meetingLines.Select(ParseMeeting).ToArray();
+            AssertThatMeetingsAreParsedCorrectly(meetings.ToList());
         }
 
-        private static Meeting ParseMeeting(string line)
+        [Test]
+        public void Throws_exception_when_meeting_date_can_not_be_parsed()
         {
-            var meeting = line.Split(',');
-            return new Meeting
-            {
-                Name = meeting[0],
-                Organiser = meeting[1],
-                Date = ParseDate(meeting[2]),
-                StartTime = ParseDate(meeting[3]),
-                EndTime = ParseDate(meeting[4])
-            };
-        }
-        private static DateTime ParseDate(string date)
-        {
-            DateTime parsedDate;
-            if (DateTime.TryParse(date, out parsedDate))
-                return parsedDate;
+            _fileReader.Setup(f => f.ReadData(_fileName))
+                .Returns(new[] { "Name, Organiser, Date, Start Time, End time",
+                                 "OOP Intro,SpiderMan, Blah blah, 10:00:00, 11:00:00"
+                                });
 
-            throw new BadDateException($"Can not parse date {date}.");
+             Assert.Throws<BadDateException>(()=> _csvMeetingFileParser.ParseMeetings(_fileName));
+        }
+
+        private static void AssertThatMeetingsAreParsedCorrectly(IList<Meeting> scheduledMeetings)
+        {
+            Assert.That(scheduledMeetings.Count, Is.EqualTo(2));
+
+            Assert.That(scheduledMeetings[0].Name, Is.EqualTo("OOP Intro"));
+            Assert.That(scheduledMeetings[0].Organiser, Is.EqualTo("SpiderMan"));
+            Assert.That(scheduledMeetings[0].Date, Is.EqualTo(DateTime.Parse("24-11-2016")));
+            Assert.That(scheduledMeetings[0].StartTime, Is.EqualTo(DateTime.Parse("10:00:00")));
+            Assert.That(scheduledMeetings[0].EndTime, Is.EqualTo(DateTime.Parse("11:00:00")));
+
+            Assert.That(scheduledMeetings[1].Name, Is.EqualTo("Function Programming Intro"));
+            Assert.That(scheduledMeetings[1].Organiser, Is.EqualTo("SuperMan"));
+            Assert.That(scheduledMeetings[1].Date, Is.EqualTo(DateTime.Parse("25-11-2016")));
+            Assert.That(scheduledMeetings[1].StartTime, Is.EqualTo(DateTime.Parse("09:00:00")));
+            Assert.That(scheduledMeetings[1].EndTime, Is.EqualTo(DateTime.Parse("10:00:00")));
         }
     }
 }

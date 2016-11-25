@@ -58,9 +58,18 @@
     <Compile Include="OOP\Meeting.cs" />
     <Compile Include="OOP\MeetingFile.cs" />
     <Compile Include="PathExtensions.cs" />
+    <Compile Include="POOP\BadDateException.cs" />
+    <Compile Include="POOP\Calendar.cs" />
+    <Compile Include="POOP\FileSystemFileReader.cs" />
+    <Compile Include="POOP\IMeetingFileParser.cs" />
+    <Compile Include="POOP\Meeting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\OOP\MeetingFileTests.cs" />
+    <Compile Include="POOP\CsvMeetingFileParser.cs" />
     <Compile Include="Tests\POOP\CsvMeetingFileParserTests.cs" />
+    <Compile Include="POOP\IFileReader.cs" />
+    <Compile Include="Tests\POOP\FileSystemFileReaderTests.cs" />
+    <Compile Include="Tests\POOP\MeetingFileSchedulerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -78,7 +87,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="POOP\" />
+    <Content Include="Tests\POOP\testfile.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
