@@ -46,31 +46,15 @@ namespace MeetingBlog.Tests.POOP
 
         private class TestCalendar : Calendar
         {
-            public List<Meeting> ScheduledMeetings { get; set; } = new List<Meeting>();
+            public List<Meeting> ScheduledMeetings { get; private set; }
+
+            public TestCalendar()
+            {
+                ScheduledMeetings = new List<Meeting>();
+            }
             public void Schedule(Meeting meeting)
             {
                 ScheduledMeetings.Add(meeting);
-            }
-        }
-    }
-
-    internal class MeetingFileScheduler
-    {
-        private readonly IMeetingFileParser _meetingFileParser;
-        private readonly Calendar _calendar;
-
-        public MeetingFileScheduler(IMeetingFileParser meetingFileParser, Calendar calendar)
-        {
-            _meetingFileParser = meetingFileParser;
-            _calendar = calendar;
-        }
-
-        public void ScheduleFrom(string meetingfile)
-        {
-            var meetings = _meetingFileParser.ParseMeetings(meetingfile);
-            foreach (var meeting in meetings)
-            {
-                _calendar.Schedule(meeting);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 namespace MeetingBlog.POOP
 {
-    public class BadDateException : Exception
+    internal class BadDateException : Exception
     {
         public BadDateException(string message) :base(message)
         {

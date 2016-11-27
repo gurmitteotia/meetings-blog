@@ -20,7 +20,6 @@ namespace MeetingBlog.Tests.POOP
             _fileReader = new Mock<IFileReader>();
             _csvMeetingFileParser = new CsvMeetingFileParser(_fileReader.Object);
         }
-
         [Test]
         public void Can_parse_multiple_meetings_from_file()
         {

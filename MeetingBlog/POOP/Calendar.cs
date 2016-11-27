@@ -1,6 +1,6 @@
 ﻿namespace MeetingBlog.POOP
 {
-    public interface Calendar
+    internal interface Calendar
     {
         void Schedule(Meeting meeting);
     }

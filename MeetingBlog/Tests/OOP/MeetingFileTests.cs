@@ -47,7 +47,12 @@ namespace MeetingBlog.Tests.OOP
         }
         private class TestCalendar : Calendar
         {
-            public List<Meeting> ScheduledMeetings { get; set; } = new List<Meeting>();
+            public List<Meeting> ScheduledMeetings { get; private set; }
+
+            public TestCalendar()
+            {
+                ScheduledMeetings = new List<Meeting>();
+            }  
             public void Schedule(Meeting meeting)
             {
                 ScheduledMeetings.Add(meeting);    

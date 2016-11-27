@@ -3,7 +3,7 @@ using System.IO;
 
 namespace MeetingBlog.POOP
 {
-    public class FileSystemFileReader : IFileReader
+    internal class FileSystemFileReader : IFileReader
     {
         public IEnumerable<string> ReadData(string filePath)
         {

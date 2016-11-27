@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using MeetingBlog.OOP;
 
 namespace MeetingBlog.POOP
 {
-    public interface IMeetingFileParser
+    //interface to read meetings from file
+    internal interface IMeetingFileParser
     {
         IEnumerable<Meeting> ParseMeetings(string filePath);
     }

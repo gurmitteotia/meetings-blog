@@ -36,14 +36,7 @@ namespace MeetingBlog.OOP
                 get
                 {
                     var meeting = _line.Split(',');
-                    return new Meeting
-                    {
-                        Name = meeting[0],
-                        Organiser = meeting[1],
-                        Date = ParseDate(meeting[2]),
-                        StartTime = ParseDate(meeting[3]),
-                        EndTime = ParseDate(meeting[4])
-                    };
+                    return new Meeting(meeting[0], meeting[1], ParseDate(meeting[2]), ParseDate(meeting[3]), ParseDate(meeting[4]));
                 }
             }
             private DateTime ParseDate(string date)
@@ -52,7 +45,7 @@ namespace MeetingBlog.OOP
                 if(DateTime.TryParse(date, out parsedDate))
                     return parsedDate;
 
-                throw new BadDateException($"Can not parse date {date} from line {_line}");
+                throw new BadDateException(string.Format("Can not parse date {0} from line {1}",date,_line));
             }
         }
     }

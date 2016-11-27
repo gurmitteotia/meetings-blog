@@ -69,6 +69,7 @@
     <Compile Include="Tests\POOP\CsvMeetingFileParserTests.cs" />
     <Compile Include="POOP\IFileReader.cs" />
     <Compile Include="Tests\POOP\FileSystemFileReaderTests.cs" />
+    <Compile Include="POOP\MeetingFileScheduler.cs" />
     <Compile Include="Tests\POOP\MeetingFileSchedulerTests.cs" />
   </ItemGroup>
   <ItemGroup>

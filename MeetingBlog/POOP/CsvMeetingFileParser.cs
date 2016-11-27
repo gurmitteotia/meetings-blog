@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MeetingBlog.OOP;
 
 namespace MeetingBlog.POOP
 {
-    internal class CsvMeetingFileParser
+    internal class CsvMeetingFileParser : IMeetingFileParser
     {
         private readonly IFileReader _fileReader;
 
@@ -19,7 +18,6 @@ namespace MeetingBlog.POOP
 
             return meetingLines.Skip(1).Select(ParseMeeting).ToArray();
         }
-
         private static Meeting ParseMeeting(string line)
         {
             var meeting = line.Split(',');
@@ -38,7 +36,7 @@ namespace MeetingBlog.POOP
             if (DateTime.TryParse(date, out parsedDate))
                 return parsedDate;
 
-            throw new BadDateException($"Can not parse date {date}.");
+            throw new BadDateException(string.Format("Can not parse date {0}.",date));
         }
     }
 }
