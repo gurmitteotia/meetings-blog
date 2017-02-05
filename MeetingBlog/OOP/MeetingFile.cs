@@ -24,6 +24,7 @@ namespace MeetingBlog.OOP
         {
             _meetings.ForEach(calendar.Schedule);
         }
+        //This class can also exists outside and edge unit test cases can be written directly against it.
         private class MeetingLine
         {
             private readonly string _line;

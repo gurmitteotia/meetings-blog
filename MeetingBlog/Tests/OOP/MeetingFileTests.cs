@@ -31,19 +31,12 @@ namespace MeetingBlog.Tests.OOP
         private static void AssertThatMeetingsAreScheduledIn(TestCalendar calendar)
         {
             var scheduledMeetings = calendar.ScheduledMeetings;
-            Assert.That(scheduledMeetings.Count, Is.EqualTo(2));
-
-            Assert.That(scheduledMeetings[0].Name, Is.EqualTo("OOP Intro"));
-            Assert.That(scheduledMeetings[0].Organiser, Is.EqualTo("SpiderMan"));
-            Assert.That(scheduledMeetings[0].Date, Is.EqualTo(DateTime.Parse("24-11-2016")));
-            Assert.That(scheduledMeetings[0].StartTime, Is.EqualTo(DateTime.Parse("10:00:00")));
-            Assert.That(scheduledMeetings[0].EndTime, Is.EqualTo(DateTime.Parse("11:00:00")));
-
-            Assert.That(scheduledMeetings[1].Name, Is.EqualTo("Function Programming Intro"));
-            Assert.That(scheduledMeetings[1].Organiser, Is.EqualTo("SuperMan"));
-            Assert.That(scheduledMeetings[1].Date, Is.EqualTo(DateTime.Parse("25-11-2016")));
-            Assert.That(scheduledMeetings[1].StartTime, Is.EqualTo(DateTime.Parse("09:00:00")));
-            Assert.That(scheduledMeetings[1].EndTime, Is.EqualTo(DateTime.Parse("10:00:00")));
+            
+            Assert.That(scheduledMeetings, Is.EqualTo(new []
+            {
+                new Meeting("OOP Intro", "SpiderMan", DateTime.Parse("24-11-2016"), DateTime.Parse("10:00:00"), DateTime.Parse("11:00:00")),
+                new Meeting("Function Programming Intro", "SuperMan", DateTime.Parse("25-11-2016"), DateTime.Parse("09:00:00"), DateTime.Parse("10:00:00"))
+            }));
         }
         private class TestCalendar : Calendar
         {
