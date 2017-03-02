@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using Castle.Core.Internal;
 
 
@@ -17,7 +15,7 @@ namespace MeetingBlog.OOP
         public static MeetingFile Csv(string path)
         {
             var meetingLines = File.ReadAllLines(path).Skip(1).Select(line => new MeetingLine(line));
-            return new MeetingFile(meetingLines.Select(ml=>ml.Meeting).ToArray());
+            return new MeetingFile(meetingLines.Select(ml => ml.Meeting).ToArray());
         }
 
         public void ScheduleIn(Calendar calendar)
@@ -43,10 +41,10 @@ namespace MeetingBlog.OOP
             private DateTime ParseDate(string date)
             {
                 DateTime parsedDate;
-                if(DateTime.TryParse(date, out parsedDate))
+                if (DateTime.TryParse(date, out parsedDate))
                     return parsedDate;
 
-                throw new BadDateException(string.Format("Can not parse date {0} from line {1}",date,_line));
+                throw new BadDateException(string.Format("Can not parse date {0} from line {1}", date, _line));
             }
         }
     }
