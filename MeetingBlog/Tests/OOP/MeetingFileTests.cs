@@ -13,6 +13,7 @@ namespace MeetingBlog.Tests.OOP
         public void Can_schedule_meetings_in_calendar_from_csv_file()
         {
             var calendar = new TestCalendar();
+            //Other potential approach is to generate csv file in tests
             var meetingFile = MeetingFile.Csv(@"Tests\OOP\ValidMeetings.csv".ToAbsolutePath());
 
             meetingFile.ScheduleIn(calendar);
