@@ -1,12 +1,11 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using MeetingBlog.OOP;
 using MeetingBlog.OOP.Appraoch2;
 using NUnit.Framework;
-using MeetingFile = MeetingBlog.OOP.MeetingFile;
+using MeetingFile = MeetingBlog.OOP.Appraoch2.MeetingFile;
 
-namespace MeetingBlog.Tests.OOP
+namespace MeetingBlog.Tests.OOP.Approach2
 {
     [TestFixture]
     public class MeetingFileTests
@@ -15,8 +14,7 @@ namespace MeetingBlog.Tests.OOP
         public void Can_schedule_meetings_in_calendar_from_csv_file()
         {
             var calendar = new TestCalendar();
-            //Other potential approach is to generate csv file in tests
-            var meetingFile = MeetingFile.Csv(@"Tests\OOP\ValidMeetings.csv".ToAbsolutePath());
+            var meetingFile = MeetingFile.Parse(@"Tests\OOP\ValidMeetings.csv".ToAbsolutePath(), FileFormat.Csv);
 
             meetingFile.ScheduleIn(calendar);
 
@@ -26,9 +24,9 @@ namespace MeetingBlog.Tests.OOP
         [Test]
         public void Throws_exception_on_invalid_format_file()
         {
-            Assert.Throws<BadDateException>(() => MeetingFile.Csv(@"Tests\OOP\InvalidDateMeeting.csv".ToAbsolutePath()));
-            Assert.Throws<BadDateException>(() => MeetingFile.Csv(@"Tests\OOP\InvalidStartTimeMeeting.csv".ToAbsolutePath()));
-            Assert.Throws<BadDateException>(() => MeetingFile.Csv(@"Tests\OOP\InvalidEndTimeMeeting.csv".ToAbsolutePath()));
+            Assert.Throws<BadDateException>(() => MeetingFile.Parse(@"Tests\OOP\InvalidDateMeeting.csv".ToAbsolutePath(), FileFormat.Csv));
+            Assert.Throws<BadDateException>(() => MeetingFile.Parse(@"Tests\OOP\InvalidStartTimeMeeting.csv".ToAbsolutePath(), FileFormat.Csv));
+            Assert.Throws<BadDateException>(() => MeetingFile.Parse(@"Tests\OOP\InvalidEndTimeMeeting.csv".ToAbsolutePath(), FileFormat.Csv));
         }
 
         private static void AssertThatMeetingsAreScheduledIn(TestCalendar calendar)
