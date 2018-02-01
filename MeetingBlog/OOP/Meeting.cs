@@ -2,7 +2,10 @@
 
 namespace MeetingBlog.OOP
 {
-    public class Meeting
+    /*
+     * For the purpose of this tutorial following class is just a DTO, which does not have any behaviour. In real world it might a domain entity with behaviour.
+    */
+    public struct Meeting
     {
         private readonly string _name;
         private readonly string _organiser;
@@ -17,31 +20,6 @@ namespace MeetingBlog.OOP
             _date = date;
             _startTime = startTime;
             _endTime = endTime;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj)) return false;
-            if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
-            return Equals((Meeting)obj);
-        }
-        private bool Equals(Meeting other)
-        {
-            return string.Equals(_name, other._name) && string.Equals(_organiser, other._organiser) && _date.Equals(other._date) && _startTime.Equals(other._startTime) && _endTime.Equals(other._endTime);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                var hashCode = _name.GetHashCode();
-                hashCode = (hashCode * 397) ^ _organiser.GetHashCode();
-                hashCode = (hashCode * 397) ^ _date.GetHashCode();
-                hashCode = (hashCode * 397) ^ _startTime.GetHashCode();
-                hashCode = (hashCode * 397) ^ _endTime.GetHashCode();
-                return hashCode;
-            }
         }
     }
 }

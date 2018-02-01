@@ -32,11 +32,10 @@ namespace MeetingBlog.POOP
         }
         private static DateTime ParseDate(string date)
         {
-            DateTime parsedDate;
-            if (DateTime.TryParse(date, out parsedDate))
+            if (DateTime.TryParse(date, out var parsedDate))
                 return parsedDate;
 
-            throw new BadDateException(string.Format("Can not parse date {0}.",date));
+            throw new BadDateException($"Can not parse date {date}.");
         }
     }
 }

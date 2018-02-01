@@ -53,13 +53,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="OOP\Appraoch2\MeetingFile.cs" />
     <Compile Include="OOP\BadDateException.cs" />
     <Compile Include="OOP\Calendar.cs" />
-    <Compile Include="OOP\Appraoch2\FileFormat.cs" />
     <Compile Include="OOP\Meeting.cs" />
-    <Compile Include="OOP\MeetingFile.cs" />
-    <Compile Include="OOP\Appraoch2\StreamReaderExtensions.cs" />
+    <Compile Include="OOP\CsvMeetingFile.cs" />
     <Compile Include="PathExtensions.cs" />
     <Compile Include="POOP\BadDateException.cs" />
     <Compile Include="POOP\Calendar.cs" />
@@ -67,8 +64,7 @@
     <Compile Include="POOP\IMeetingFileParser.cs" />
     <Compile Include="POOP\Meeting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\OOP\Approach2\MeetingFileTests.cs" />
-    <Compile Include="Tests\OOP\MeetingFileTests.cs" />
+    <Compile Include="Tests\OOP\CsvMeetingFileTests.cs" />
     <Compile Include="POOP\CsvMeetingFileParser.cs" />
     <Compile Include="Tests\POOP\CsvMeetingFileParserTests.cs" />
     <Compile Include="POOP\IFileReader.cs" />
@@ -78,18 +74,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Tests\OOP\InvalidEndTimeMeeting.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Tests\OOP\InvalidStartTimeMeeting.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Tests\OOP\InvalidDateMeeting.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="Tests\OOP\ValidMeetings.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Tests\POOP\testfile.txt">

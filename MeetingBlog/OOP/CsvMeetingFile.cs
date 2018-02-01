@@ -2,28 +2,24 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Castle.Core.Internal;
 
 
 namespace MeetingBlog.OOP
 {
-    public class MeetingFile
+    public class CsvMeetingFile
     {
-        private readonly IEnumerable<Meeting> _meetings;
-        private MeetingFile(IEnumerable<Meeting> meetings)
+        private readonly string _filePath;
+        public CsvMeetingFile(string filePath)
         {
-            _meetings = meetings;
+            _filePath = filePath;
         }
-        public static MeetingFile Csv(string path)
+      
+        public IEnumerable<Meeting> Meetings()
         {
-            var meetingLines = File.ReadAllLines(path).Skip(1).Select(line => new MeetingLine(line));
-            return new MeetingFile(meetingLines.Select(ml => ml.Meeting).ToArray());
+            var meetingLines = File.ReadAllLines(_filePath).Skip(1).Select(line => new MeetingLine(line));
+            return meetingLines.Select(l => l.Meeting).ToArray();
         }
 
-        public void ScheduleIn(Calendar calendar)
-        {
-            _meetings.ForEach(calendar.Schedule);
-        }
         //This class can also exists outside and edge unit test cases can be written directly against it.
         private class MeetingLine
         {
@@ -42,11 +38,9 @@ namespace MeetingBlog.OOP
             }
             private DateTime ParseDate(string date)
             {
-                DateTime parsedDate;
-                if (DateTime.TryParse(date, out parsedDate))
+                if (DateTime.TryParse(date, out var parsedDate))
                     return parsedDate;
-
-                throw new BadDateException(string.Format("Can not parse date {0} from line {1}", date, _line));
+                throw new BadDateException($"Can not parse date {date} from line {_line}");
             }
         }
     }
