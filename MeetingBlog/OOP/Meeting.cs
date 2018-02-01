@@ -7,19 +7,19 @@ namespace MeetingBlog.OOP
     */
     public struct Meeting
     {
-        private readonly string _name;
-        private readonly string _organiser;
-        private readonly DateTime _date;
-        private readonly DateTime _startTime;
-        private readonly DateTime _endTime;
-        
+        public string Name { get; }
+        public string Organiser { get; }
+        public DateTime Date { get; }
+        public DateTime StartTime { get; }
+        public DateTime EndTime { get; }
+
         public Meeting(string name, string organiser, DateTime date, DateTime startTime, DateTime endTime)
         {
-            _name = name;
-            _organiser = organiser;
-            _date = date;
-            _startTime = startTime;
-            _endTime = endTime;
+            Name = name;
+            Organiser = organiser;
+            Date = date;
+            StartTime = startTime;
+            EndTime = endTime;
         }
     }
 }
