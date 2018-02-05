@@ -13,13 +13,11 @@ namespace MeetingBlog.OOP
         {
             _filePath = filePath;
         }
-      
         public IEnumerable<Meeting> Meetings()
         {
             var meetingLines = File.ReadAllLines(_filePath).Skip(1).Select(line => new MeetingLine(line));
             return meetingLines.Select(l => l.Meeting).ToArray();
         }
-
         //This class can also exists outside and edge unit test cases can be written directly against it.
         private class MeetingLine
         {
@@ -33,7 +31,11 @@ namespace MeetingBlog.OOP
                 get
                 {
                     var meeting = _line.Split(',');
-                    return new Meeting(meeting[0], meeting[1], ParseDate(meeting[2]), ParseDate(meeting[3]), ParseDate(meeting[4]));
+                    return new Meeting
+                    {
+                        Name = meeting[0], Organiser = meeting[1], Date = ParseDate(meeting[2]),
+                        StartTime = ParseDate(meeting[3]), EndTime = ParseDate(meeting[4])
+                    };
                 }
             }
             private DateTime ParseDate(string date)

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.IO;
+using System.Linq;
 using MeetingBlog.OOP;
 
 using NUnit.Framework;
@@ -32,13 +33,31 @@ namespace MeetingBlog.Tests.OOP
             AppendFileLine("Function Programming Intro,SuperMan, 25-11-2016, 09:00:00, 10:00:00");
             var meetingFile = new CsvMeetingFile(_filePath);
 
-            var meetings = meetingFile.Meetings();
+            var meetings = meetingFile.Meetings().ToArray();
 
-            Assert.That(meetings, Is.EqualTo(new[]
+            Assert.That(meetings.Count(), Is.EqualTo(2));
+            var meeting1 = new Meeting()
             {
-                new Meeting("OOP Intro", "SpiderMan", DateTime.Parse("24-11-2016"), DateTime.Parse("10:00:00"), DateTime.Parse("11:00:00")),
-                new Meeting("Function Programming Intro", "SuperMan", DateTime.Parse("25-11-2016"), DateTime.Parse("09:00:00"), DateTime.Parse("10:00:00"))
-            }));
+                Name = "OOP Intro",Organiser = "SpiderMan",Date = DateTime.Parse("24-11-2016"),
+                StartTime = DateTime.Parse("10:00:00"),EndTime = DateTime.Parse("11:00:00")
+            };
+            var meeting2 = new Meeting()
+            {
+                Name = "OOP Intro",Organiser = "SpiderMan",Date = DateTime.Parse("24-11-2016"),
+                StartTime = DateTime.Parse("10:00:00"),EndTime = DateTime.Parse("11:00:00")
+            };
+            AssertMeetingsContains(meetings, meeting1);
+            AssertMeetingsContains(meetings, meeting2);
+
+        }
+
+        private void AssertMeetingsContains(Meeting[] meetings, Meeting expected)
+        {
+            var actual = meetings.First(m => m.Name == expected.Name);
+            Assert.That(actual.Organiser, Is.EqualTo(expected.Organiser));
+            Assert.That(actual.Date, Is.EqualTo(expected.Date));
+            Assert.That(actual.StartTime, Is.EqualTo(expected.StartTime));
+            Assert.That(actual.EndTime, Is.EqualTo(expected.EndTime));
         }
 
         [Test]
